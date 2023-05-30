@@ -159,7 +159,8 @@ class BrainTumorClassifier():
         # Running the loop until no more data is left to test.
         while len(test_data_indexes) != 0:
             # Getting a data sample.
-            data = testloader.next()
+            #data = testloader.next() #AttributeError: '_SingleProcessDataLoaderIter' object has no attribute 'next'
+            data = next(testloader)
             # Getting the data index
             index = int(data['index'])
             # Removing the data index from total data indices

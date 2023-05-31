@@ -16,6 +16,8 @@ def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('--file', required=False, type=str,
                         help='Single input file name.')
+    parser.add_argument('--output1', required=False, type=str,
+                        help='Single output file name.')
     parser.add_argument('--dir', required=False,
                         type=str, help='Directory name with input images')
     parser.add_argument('--ofp', required=False,
@@ -23,7 +25,8 @@ def get_arguments():
     parser.add_argument('--odp', required=False,
                         type=str, help='Directory path for output images.Use this if using "dir" flag.')
     args = parser.parse_args()
-    args = {'file': args.file, 'folder': args.dir,
+    #args = {'file': args.file, 'folder': args.dir,
+    args = {'file': args.file, 'output1': args.output1, 'folder': args.dir,
             'ofp': args.ofp, 'odp': args.odp}
     return args
 
@@ -45,6 +48,8 @@ class Api:
         if file != None:
             image = self._get_file(file)
             output = self._get_model_output(image, model)
+            #output1 = output #para crear la salida
+            output1 ='predicted'+'.'+extension
 
             name, extension = file.split('.')
             save_path = name+'_predicted'+'.'+extension
@@ -60,9 +65,12 @@ class Api:
                 file_name = os.path.join(folder, file)
                 image = self._get_file(file_name)
                 output = self._get_model_output(image, model)
+                #output1 = output #para crear la salida
+                output1 ='predicted'+'.'+extension
 
                 name, extension = file.split('.')
                 save_path = name+'_predicted'+'.'+extension
+                #save_path = 'predicted'+'.'+extension
 
                 save_path = os.path.join(
                     odp, save_path) if odp else os.path.join(folder, save_path)

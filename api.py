@@ -36,7 +36,8 @@ class Api:
         self.device = torch.device(
             'cuda' if torch.cuda.is_available() else 'cpu')
 
-    def call(self, file, folder, ofp, odp):
+    #def call(self, file, folder, ofp, odp):
+    def call(self, file, output1, folder, ofp, odp):
         """Method saves the predicted image by taking different parameters."""
         if file != None and folder != None:
             print('"folder" flag and "file" flag cant be used together')
@@ -49,7 +50,7 @@ class Api:
             image = self._get_file(file)
             output = self._get_model_output(image, model)
             #output1 = output #para crear la salida
-            output1 ='predicted'+'.'+extension
+            output1 ='predicted'
 
             name, extension = file.split('.')
             save_path = name+'_predicted'+'.'+extension

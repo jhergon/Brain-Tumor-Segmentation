@@ -50,10 +50,11 @@ class Api:
             image = self._get_file(file)
             output = self._get_model_output(image, model)
             #output1 = output #para crear la salida
-            output1 ='predicted'
+            
 
             name, extension = file.split('.')
             save_path = name+'_predicted'+'.'+extension
+            output1 =name+'_predicted'+'.'+extension
             if ofp:
                 save_path = os.path.join(ofp,save_path)
                 
@@ -71,7 +72,7 @@ class Api:
 
                 name, extension = file.split('.')
                 save_path = name+'_predicted'+'.'+extension
-                #save_path = 'predicted'+'.'+extension
+                output1 =name+'_predicted'+'.'+extension
 
                 save_path = os.path.join(
                     odp, save_path) if odp else os.path.join(folder, save_path)
